@@ -1,0 +1,175 @@
+<resources>
+    <string name="app_name">Fitness App 3</string>
+
+
+    <string name="pose1">    Step 1:- Start in the push-up position with your arms completely straight and directly beneath your shoulders.\n\n
+                             Step 2:- Your body should form a straight line from your shoulders to your ankles. \n\n
+                             Step 3:- Squeeze your abs, lift one foot off the floor and bring your knee up towards your chest while keeping your body in as straight of a line as possible. \n\n
+                             Step 4:- Return to the starting position and repeat the movement with your opposite leg.. </string>
+    <string name="pose2">    Step 1:- Lie flat on your mat with knees bent and feet on the mat. \n\n
+                             Step 2:- Hands at the base of your head and elbows pointed out. \n\n
+                             Step 3:- Using your abdominals bring your head and shoulders off the mat and come up into a crunch, then lower with control. </string>
+    <string name="pose3">    Step 1:- This movement is performed with a bench and a foot stool.\n\n
+                             Step 2:- Place a bench behind yourself and rest on it with your hands. Place your legs straight out in front of you. You may also place them at an elevated level as shown above.\n\n
+                             Step 3:- Begin with arms in a fully. Slowly bend at your elbows keeping the rest of your body straight. Be sure to keep your elbows back and close together.\n\n
+                             Step 4:- Dip down until your arms form a 90 degree angle and you feel a stretch in the triceps.\n\n
+                             Step 5:- Slowly extend your arms raising your body back up. Pause and contract your triceps muscles at the top. Pause and repeat the movement.</string>
+    <string name="pose4">    Step 1:- Lie flat on the floor with your lower back pressed to the ground (pull your navel in to also target your deep abs). \n\n
+                             Step 2:- Put your hands behind your head, then bring your knees in towards your Chest and lift your shoulder blades off the ground, but be sure not to pull on your neck.\n\n
+                             Step 3:-Straighten your right leg out to about a 4S-degree angle to the ground while turning your upper body to the left, bringing your right elbow towards the left knee.\n\n
+                             Step 4:- Make sure your rib cage is moving and adjust your elbows. Now switch sides and do the same motion on the other side to complete one rep. </string>
+    <string name="pose5">    Step 1:- Lay down with your hands to your sides for support. \n\n
+                             Step 2:- Raise your legs so they are off the ground, keeping the abdominals tight.\n\n
+                             Step 3:- Slowly raise your legs 90 degrees, contracting the abdominal muscles. Slowly return to starting position. Do not touch the floor with your feet.\n\n
+                            </string>
+    <string name="pose6">    Step 1:- Lie on your back on an exercise mat. With your arms straight at your sides, bend your knees and place your feet flat on the floor between18 and 24 inches apart.\n\n
+                             Step 2:- Breathing out, crunch your ab slightly upward and sideways to the right a couple of inches until your right hand touches your right heel.\n\n
+                             Step 3:- Hold brief|y and then return to your starting position while inhaling. Repeat on the left side. </string>
+    <string name="pose7">    Step 1:- You can perform straight-leg crunches by lying face up on the floor with your legs straight and then moving your upper body as you would for a standard bent-knee crunch.\n\n
+                             Step 2:- Alternatively, lie on your back, raise your legs so they are perpendicular to the floor and then perform the standard crunching motion with your torso.
+                             </string>
+    <string name="pose8">    Step 1:- Lie down on the floor placing your feet either under something that Will not move or by having a partner hold them. Your legs should be bent at the kneesPlace your hands behind your head and lock them together by claspihg your fingers. This is the starting position.\n\n
+                             Step 2:- Elevate your upper body so that it creates an imaginary V-shape with your thighs. Breathe out when performing this part of the exercise.\n\n
+                             Step 3:- Once you feel the contraction for a second, lower your upper body back down to the starting position while inhahng. \n\n
+                             Step 4:- Repeat for the recommended amount of repetitions.
+                            </string>
+    <string name="pose9">    Step 1:- Lying on the back,lift stright leg,extend opposite hand to touch toe. \n\n
+                             Step 2:- Please,return,alternate inhale down,exhale up at toe touch.
+                            </string>
+    <string name="pose10">    Step 1:- High Plank position then slowly rotate your torso to the side raising your arm till it gets ihlihe with the other one. \n\n
+                             Step 2:- Then return to the initial position.
+                            </string>
+    <string name="pose11">    Step 1:- Lie on the floor with elbows directly beneath your shoulders and legs fully extended.\n\n
+                             Step 2:- Raise your torso into the air until it makes a straight line from your shoulders to your ankles. Tighten your stomach, squeeze your butt.
+                            </string>
+    <string name="pose12">    Step 1:- Lie down on the floor placing your feet either under something that will not move or by having a partner hold them. Your legs should be bent at the knees. Elevate your upper body so that it creates an imaginary V-shape with your thighs. \n\n
+                             Step 2:- Your arms should be fully extended in front of you perpendicular to your torso and with the hands clasped. This is the starting position.\n\n
+                             Step 3:- This is the starting position. Twist your torso to the right side until your arms are parallel with the floor while breathing out. \n\n
+                             Step 4:- Hold the contraction for a second and move back to the starting position while breathing out. Now move to the opposite side performing the same techniques you applied to the right side. Repeat for the recommended amount of repetitions.
+                            </string>
+    <string name="pose13">    Step 1:- Lie on your back with your knees bent, feet flat and hip width. \n\n
+                             Step 2:- Lower your pelvis 2 inches from the floor. Squeeze your glutes and lift your pelvis back to bridge position.
+
+                            </string>
+    <string name="pose14">    Step 1:- Lie facedown on the floor with your arms extended in front of you and your leg extended behind you. \n\n
+                             Step 2:- In one movement,engage your glutes and lower back to raise your arms,legs,and chest off the floor.\n\n
+                             Step 3:- Hold for a count,then slowly return to the starting position.
+                            </string>
+    <string name="pose15">   Step 1:- Stand, extend arms 90° to sides, bend forward 90° at waist.\n\n
+                             Step 2:- Looking at the floor, rotate torso to touch hand to foot, rotate for other hand. \n\n
+                             Step 3:- Head will follow chest action. </string>
+
+    ///////////////////////////////
+
+
+    <string name="fit1">     Step 1: Stand with feet shoulder-width apart and fists up near your face.\n\n
+                                Step 2: Punch one arm straight forward, rotating slightly through your torso.\n\n
+                                Step 3: Pull back and repeat with the other arm, alternating continuously.</string>\
+
+    <string name="fit2">    Step 1: Stand over the barbell, grip it with both hands, and lift it to shoulder level in one motion.\n\n
+                            Step 2: Pause briefly with the bar at your shoulders.\n\n
+                            Step 3: Push the bar overhead, then return it to the floor safely. </string>
+
+    <string name="fit3">    Step 1: Stand tall, then bend forward and place your hands on the ground.\n\n
+                            Step 2: Walk your hands forward until you are in a high plank position.\n\n
+                            Step 3: Walk your feet up toward your hands and return to standing.</string>
+
+    <string name="fit4">    Step 1: Stand with feet together and arms by your sides.\n\n
+                            Step 2: Jump your feet out while raising your arms overhead.\n\n
+                            Step 3: Jump back to the starting position and repeat.</string>
+
+    <string name="fit5">    Step 1: Lie on your back, legs bent at 90°, arms by your sides.\n\n
+                            Step 2: Lift your hips off the ground, bringing knees toward your chest.\n\n
+                            Step 3: Slowly lower your hips back down and repeat.</string>
+
+    <string name="fit6">    Step 1: Start in a squat position with feet shoulder-width apart.\n\n
+                            Step 2: Jump up explosively, extending your arms upward.\n\n
+                            Step 3: Land softly back into the squat and repeat. </string>
+
+    <string name="fit7">    Step 1: Stand tall, feet shoulder-width apart.\n\n
+                            Step 2: Lower into a squat and touch the ground with your hands.\n\n
+                            Step 3: Stand up and reach both arms straight overhead.</string>
+
+    <string name="fit8">   Step 1: Begin in a high plank with hands under shoulders.\n\n
+                           Step 2: Lower your chest while keeping elbows tucked in close.\n\n
+                           Step 3: Push back up to the starting plank position.</string>
+
+    <string name="fit9">   Step 1: Start in a squat with hands in front of you.\n\n
+                            Step 2: Stand up and kick one leg forward.\n\n
+                            Step 3: Return to squat and kick with the opposite leg.</string>
+
+    <string name="fit10">    Step 1: From standing, drop into a squat and place your hands on the ground.\n\n
+                            Step 2: Kick your feet back into a plank position.\n\n
+                            Step 3: Jump your feet back in, stand, and jump upward</string>
+
+    <string name="fit11">   Step 1: Begin in a lunge with one leg forward.\n\n
+                            Step 2: Jump up explosively, switching your legs mid-air.\n\n
+                            Step 3: Land softly with the opposite leg forward and repeat.</string>
+
+    <string name="fit12">    Step 1: Stand on one leg with the other leg slightly lifted.
+                             Step 2: Rotate the lifted leg outward at the hip.
+                             Step 3: Rotate it inward, maintaining balance throughout.</string>
+
+    <string name="fit13">    Step 1: Begin in a high plank position.\n\n
+                                Step 2: Rotate your body to one side, lifting one arm toward the ceiling.\n\n
+                                Step 3: Return to plank and repeat on the other side.
+
+                            </string>
+
+    <string name="fit14">   Step 1: Extend one arm across your chest.\n\n
+                            Step 2: Use your other hand to gently pull the extended arm toward your chest.\n\n
+                            Step 3: Hold for 20–30 seconds, then switch sides.
+
+                            </string>
+
+    <string name="fit15">   Step 1: Start in a squat position with feet shoulder-width apart.\n\n
+                            Step 2: Jump up explosively, extending your arms upward.\n\n
+                            Step 3: Land softly back into the squat and repeat. </string>
+
+
+
+    <string-array name="title_story">
+
+
+        <item>Build For Muscles</item>
+        <item>Replace Coffee With Matcha Green Tea </item>
+        <item>Just Keep Moving</item>
+        <item>Stop Counting Calories</item>
+        <item>Pick Up a Kettlebell</item>
+        <item>Do Job</item>
+        <item>Do Yoga</item>
+        <item>Make One Meal</item>
+        <item>Get Intense</item>
+        <item>Stop Sleeping In</item>
+        <item>Go Green</item>.
+        <item>Stay Hydrated, Stay Strong</item>
+        <item>Protein Is Power</item>
+        <item>Train Smart, Not Just Hard</item>
+        <item>Prioritize Sleep</item>
+        <item>Stretch to Progress</item>
+
+
+    </string-array>
+
+    <string-array name="details_story">
+
+        <item>Build For Muscles:-Building muscle is more than just lifting weights — it’s about consistent training, proper form, rest, and fueling your body correctly. Muscle mass helps improve metabolism, supports joint health, and enhances your physical appearance and strength. Focus on resistance training that includes compound movements like squats, deadlifts, and bench presses. Pair your workouts with high-protein meals and enough recovery time to allow muscles to grow stronger over time. Remember, building muscle is a long-term commitment, not a quick fix.</item>
+        <item>Replace Coffee With Matcha Green Tea:- While coffee is a popular source of caffeine, switching to matcha green tea offers a smoother, healthier energy boost. Matcha is rich in antioxidants, especially EGCG (epigallocatechin gallate), which supports fat oxidation and reduces inflammation. Unlike coffee, matcha contains L-theanine, which promotes calm focus and reduces the jittery side effects of caffeine. It’s a great choice for sustaining energy levels, improving mental clarity, and supporting overall wellness — especially during your workout days.</item>
+        <item>Just Keep Moving:- Staying active throughout the day is crucial for overall health, even if you already work out. Sitting for long periods can slow your metabolism and negatively impact posture and circulation. Find small ways to move consistently: take short walks, stretch every hour, use stairs instead of elevators, or even perform bodyweight exercises during breaks. These small actions compound over time, keeping your metabolism active, improving circulation, and supporting long-term weight management and energy levels.</item>
+        <item>Stop Counting Calories:- While calorie tracking can be useful, obsessing over every number can lead to stress and unsustainable eating habits. Instead, focus on nutrient-dense foods — whole grains, lean proteins, healthy fats, fruits, and vegetables. Learn to listen to your body’s hunger and fullness cues. Eating mindfully helps you build a healthier relationship with food, avoid unnecessary restrictions, and fuel your body properly for workouts and recovery. Quality of food often matters more than quantity.</item>
+        <item>Pick Up a Kettlebell:-Kettlebells offer a dynamic and efficient way to train your entire body. Their unique design challenges balance and coordination, making exercises like swings, Turkish get-ups, and goblet squats both strength-building and cardio-intensive. Kettlebell workouts enhance grip strength, core stability, and explosive power. They’re also space-efficient and versatile — ideal for home workouts or quick gym sessions. Add kettlebell training to your routine to improve functional fitness and break through workout plateaus.</item>
+        <item>Do Job:-Having a job or staying engaged in productive work contributes to both mental and physical well-being. A structured routine through employment encourages discipline, time management, and a sense of purpose. Being active during the day — whether its a desk job, a physical labor role, or even part-time work — helps burn calories, reduce stress, and maintain a consistent daily rhythm. Financial independence also supports access to better nutrition, gym memberships, and healthcare. Balancing your job with fitness goals teaches accountability and builds a lifestyle that promotes long-term personal growth and wellness.</item>
+        <item>Do Yoga:-Yoga isn’t just about flexibility — it’s a powerful tool for recovery, mental clarity, and body awareness. Practicing yoga improves balance, strengthens stabilizer muscles, and helps release tight areas caused by weight training. It also promotes relaxation and stress reduction through mindful breathing. Adding yoga to your weekly routine supports injury prevention, improves posture, and enhances your overall mobility — all of which benefit your main training sessions and daily movement.</item>
+        <item>Make One Meal:-Taking the time to prepare just one nutritious meal a day can make a meaningful difference in your health and fitness progress. Whether it is breakfast, lunch, or dinner, making one meal yourself gives you full control over ingredients, portions, and nutritional value. It encourages healthier choices, saves money, and builds a stronger connection with what you eat. Even a simple, home-cooked meal can be packed with protein, healthy fats, and fresh vegetables to support your goals. This small daily habit is an easy and powerful step toward a more disciplined and balanced lifestyle.</item>
+        <item>Get Intense :-High-intensity interval training (HIIT) and other intense workout styles push your body to perform at higher levels in a shorter period. These workouts involve short bursts of high effort followed by brief rest periods, which help boost cardiovascular endurance, burn fat, and preserve muscle. Intensity drives adaptation, meaning your body gets stronger and fitter in response to the challenge. Just be sure to balance intense sessions with adequate rest and recovery to prevent burnout and overtraining.</item>
+        <item>Stop Sleeping In:-Sleep is vital for muscle recovery, hormone regulation, and mental sharpness. Developing a consistent wake-up time helps set your body’s internal clock, leading to better quality sleep and increased energy during the day. Waking up earlier also gives you more time for morning workouts, healthy breakfasts, or planning your day with a clear mind. Instead of staying in bed late, aim to go to bed earlier and wake up refreshed, ready to take control of your fitness goals.</item>
+        <item>Go Green:-Green vegetables like spinach, kale, broccoli, and Swiss chard are nutritional powerhouses. They are packed with fiber, iron, calcium, magnesium, and vitamins A, C, E, and K. These nutrients support muscle function, immune health, and recovery from workouts. Greens also help maintain a healthy digestive system and keep inflammation in check. Including greens in your meals every day — in salads, smoothies, or cooked dishes — is a small habit that leads to big health improvements over time.</item>
+        <item>Stay Hydrated, Stay Strong:-Hydration is one of the most underestimated aspects of fitness, yet it is essential for performance, recovery, and overall health. Every cell, tissue, and organ in your body depends on water to function properly. When you are dehydrated, even slightly, your endurance drops, your strength declines, and your risk of cramps and injuries increases. Water also plays a role in regulating your body temperature, flushing out toxins, and delivering nutrients to your muscles. During workouts, especially in hot or humid environments, you lose water through sweat. Replenishing it is vital. Make it a habit to drink water throughout the day — not just during workouts. A good rule of thumb is 8 to 12 cups daily, but active individuals may need more. Add electrolytes if you are sweating a lot or training intensely. Staying hydrated is not just about drinking when you are thirsty — it is a consistent habit that supports your body and brain every single day.</item>
+        <item>Protein Is Power:-Protein is the building block of muscle. It repairs tissue, supports recovery, and helps maintain lean mass even when you are trying to lose fat. If you are working out — especially lifting weights or doing resistance training — your protein needs increase. Think of protein as fuel for muscle repair and growth. Without enough of it, your body may struggle to recover and adapt from training. Ideal sources include lean meats, fish, eggs, dairy, legumes, tofu, tempeh, and quality protein powders. Aim to spread your intake throughout the day rather than eating it all at once. For most active individuals, consuming about 1.6 to 2.2 grams of protein per kilogram of body weight per day is a good target. Not only will it support your performance and recovery, but it will also help with satiety, making it easier to manage cravings and stick to your nutrition plan.</item>
+        <item>Train Smart, Not Just Hard:-Many people think that training harder — more reps, longer hours, heavier weights — is the only way to get results. But the truth is, smart training gets you further than overtraining ever will. Training smart means following a plan that matches your goals, listening to your body, and balancing intensity with proper recovery. It means using proper form to avoid injury, choosing exercises that serve your goals, and adjusting when something feels off. Overtraining can lead to fatigue, poor performance, sleep disturbances, and even muscle breakdown. It is important to have rest days, periodization or planned variations in intensity and volume, and enough recovery between sessions. Smart training helps you stay consistent, motivated, and injury free — which is the real key to long term progress.</item>
+        <item>Prioritize Sleep:-Sleep is not a luxury — it is a foundation of good health and fitness. When you sleep, your body enters a recovery mode where muscles are repaired, hormones are regulated, and your brain processes everything you have learned and done that day. Lack of sleep disrupts your metabolism, impairs decision making, increases hunger especially cravings for junk food, and reduces your ability to perform in workouts. Aim for 7 to 9 hours of quality sleep each night. Create a bedtime routine that includes winding down, turning off electronics, and sleeping in a cool, dark room. Avoid caffeine late in the day and try to go to bed at the same time every night. Remember, you grow while you sleep, not while you train.</item>
+        <item>Stretch to Progress:-Stretching is often overlooked, especially by beginners and those focused on lifting or cardio. But improving your flexibility and mobility is crucial for long term progress. Regular stretching increases your range of motion, reduces the risk of injury, and helps release tight muscles caused by workouts or long periods of sitting. It also improves posture and circulation. Dynamic stretching or moving stretches is great for warming up before workouts, while static stretching or holding a position is best after exercise or on rest days. Yoga is an excellent way to incorporate stretching into your routine while also calming the mind. Even just 10 minutes a day can make a huge difference in how your body feels and performs.</item>
+    </string-array>
+
+
+</resources>
