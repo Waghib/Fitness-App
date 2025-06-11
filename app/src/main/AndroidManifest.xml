@@ -37,6 +37,24 @@
             </intent-filter>
         </service>
 
+        <!-- Authentication Activities -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+        
+        <!-- Existing Activities -->
         <activity
             android:name=".FoodActivityDetails"
             android:exported="false" />
@@ -58,13 +76,7 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".Splashscreenok"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

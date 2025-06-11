@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class SecondActivity2 extends AppCompatActivity {
 
     int[] newArray;
     private AdView mAdView,mAdView1;
+    private ExerciseFilterManager exerciseFilterManager;
 
 
     @SuppressLint("MissingInflatedId")
@@ -43,9 +45,20 @@ public class SecondActivity2 extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+        
+        // Initialize exercise filter manager
+        exerciseFilterManager = new ExerciseFilterManager(this);
+        
+        // Set title for adult exercises
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Adult Exercises (18+)");
+        }
+        
+        // Load user data and show appropriate message
+        loadUserAgeInfo();
 
+        // Adult exercise array (same IDs but will be filtered based on age)
         newArray = new int[]{
-
                 R.id.bow_pose,
                 R.id.bridge_pose,
                 R.id.chair_pose,
@@ -60,8 +73,7 @@ public class SecondActivity2 extends AppCompatActivity {
                 R.id.rotation_pose,
                 R.id.twist_pose,
                 R.id.windmill_pose,
-                R.id.legup_pose ,
-
+                R.id.legup_pose
         };
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -125,19 +137,71 @@ public class SecondActivity2 extends AppCompatActivity {
         }
         return true;
     }
-
-    public void Imagebuttonclicked(View view) {
-
-        for (int i = 0 ; i < newArray.length ; i++){
-            if(view.getId() == newArray[i]){
-                int value = i + 1;
-                Log.i("FIRST", String.valueOf(value));
-                Intent intent = new Intent(SecondActivity2.this,ThirdActivity2.class);
-                intent.putExtra("value",String.valueOf(value));
-                startActivity(intent);
+    
+    private void loadUserAgeInfo() {
+        exerciseFilterManager.getUserData(new ExerciseFilterManager.UserDataCallback() {
+            @Override
+            public void onUserDataLoaded(int age, String fitnessLevel) {
+                if (age <= 18) {
+                    // User is too young for this section
+                    Toast.makeText(SecondActivity2.this, 
+                        "Note: You're " + age + " years old. Consider using youth-appropriate exercises instead.", 
+                        Toast.LENGTH_LONG).show();
+                } else {
+                    // Show appropriate intensity recommendation
+                    String intensity = exerciseFilterManager.getRecommendedIntensity(age, fitnessLevel);
+                    Toast.makeText(SecondActivity2.this, 
+                        "Adult exercises loaded. " + intensity, 
+                        Toast.LENGTH_LONG).show();
+                }
+                
+                // Update toolbar with age info
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setSubtitle("Age " + age + " • " + fitnessLevel.split(" ")[0]);
+                }
             }
 
-        }
+            @Override
+            public void onError(String error) {
+                // Default behavior for guests
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setSubtitle("Guest Mode");
+                }
+            }
+        });
+    }
 
+    public void Imagebuttonclicked(View view) {
+        // Check if user age is appropriate for these exercises
+        exerciseFilterManager.getUserData(new ExerciseFilterManager.UserDataCallback() {
+            @Override
+            public void onUserDataLoaded(int age, String fitnessLevel) {
+                if (age <= 18) {
+                    Toast.makeText(SecondActivity2.this, 
+                        "This exercise is designed for adults. Consider youth-appropriate alternatives.", 
+                        Toast.LENGTH_SHORT).show();
+                }
+                proceedWithExercise(view);
+            }
+
+            @Override
+            public void onError(String error) {
+                // Allow guests to proceed
+                proceedWithExercise(view);
+            }
+        });
+    }
+    
+    private void proceedWithExercise(View view) {
+        for (int i = 0; i < newArray.length; i++) {
+            if (view.getId() == newArray[i]) {
+                int value = i + 1;
+                Log.i("ADULT_EXERCISE", String.valueOf(value));
+                Intent intent = new Intent(SecondActivity2.this, ThirdActivity2.class);
+                intent.putExtra("value", String.valueOf(value));
+                startActivity(intent);
+                break;
+            }
+        }
     }
 }
