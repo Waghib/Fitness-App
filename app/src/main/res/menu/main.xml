@@ -37,4 +37,9 @@
 
 
         />
+
+    <item
+        android:title="Logout"
+        android:id="@+id/logout"
+        android:orderInCategory="105" />
 </menu>
