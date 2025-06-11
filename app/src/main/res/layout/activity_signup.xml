@@ -130,7 +130,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
+                    android:layout_marginBottom="20dp"
                     app:boxStrokeColor="@color/colorPrimary"
                     app:hintTextColor="@color/colorPrimary"
                     app:passwordToggleEnabled="true">
@@ -145,6 +145,42 @@
                         android:fontFamily="monospace" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintTextColor="@color/colorPrimary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Age"
+                        android:inputType="number"
+                        android:textSize="16dp"
+                        android:fontFamily="monospace" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fitness Level"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="10dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerFitnessLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/backgroundcrop"
+                    android:padding="15dp" />
 
                 <Button
                     android:id="@+id/btnSignup"

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class SecondActivity extends AppCompatActivity {
 
     int[] newArray;
     private AdView mAdView,mAdView1;
+    private ExerciseFilterManager exerciseFilterManager;
 
 
     @SuppressLint("MissingInflatedId")
@@ -43,9 +45,20 @@ public class SecondActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+        
+        // Initialize exercise filter manager
+        exerciseFilterManager = new ExerciseFilterManager(this);
+        
+        // Set title for youth exercises
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Youth Exercises (≤18)");
+        }
+        
+        // Load user data and show appropriate message
+        loadUserAgeInfo();
 
+        // Youth-appropriate exercise array
         newArray = new int[]{
-
                 R.id.bow_pose,
                 R.id.bridge_pose,
                 R.id.chair_pose,
@@ -61,8 +74,6 @@ public class SecondActivity extends AppCompatActivity {
                 R.id.twist_pose,
                 R.id.windmill_pose,
                 R.id.legup_pose
-
-
         };
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -125,19 +136,53 @@ public class SecondActivity extends AppCompatActivity {
         }
         return true;
     }
-
-    public void Imagebuttonclicked(View view) {
-
-        for (int i = 0 ; i < newArray.length ; i++){
-            if(view.getId() == newArray[i]){
-                int value = i + 1;
-                Log.i("FIRST", String.valueOf(value));
-                Intent intent = new Intent(SecondActivity.this,ThirdActivity.class);
-                intent.putExtra("value",String.valueOf(value));
-                startActivity(intent);
+    
+    private void loadUserAgeInfo() {
+        exerciseFilterManager.getUserData(new ExerciseFilterManager.UserDataCallback() {
+            @Override
+            public void onUserDataLoaded(int age, String fitnessLevel) {
+                if (age > 18) {
+                    // User might benefit from adult exercises
+                    Toast.makeText(SecondActivity.this, 
+                        "You're " + age + " years old. You might want to try adult exercises for more challenge.", 
+                        Toast.LENGTH_LONG).show();
+                } else {
+                    // Show appropriate intensity recommendation
+                    String intensity = exerciseFilterManager.getRecommendedIntensity(age, fitnessLevel);
+                    Toast.makeText(SecondActivity.this, 
+                        "Youth-safe exercises loaded. " + intensity, 
+                        Toast.LENGTH_LONG).show();
+                }
+                
+                // Update toolbar with age info
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setSubtitle("Age " + age + " • " + fitnessLevel.split(" ")[0]);
+                }
             }
 
-        }
+            @Override
+            public void onError(String error) {
+                // Default behavior for guests
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setSubtitle("Guest Mode - Youth Safe");
+                }
+                Toast.makeText(SecondActivity.this, 
+                    "Guest mode: Youth-safe exercises loaded", 
+                    Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
+    public void Imagebuttonclicked(View view) {
+        for (int i = 0; i < newArray.length; i++) {
+            if (view.getId() == newArray[i]) {
+                int value = i + 1;
+                Log.i("YOUTH_EXERCISE", String.valueOf(value));
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                intent.putExtra("value", String.valueOf(value));
+                startActivity(intent);
+                break;
+            }
+        }
     }
 }

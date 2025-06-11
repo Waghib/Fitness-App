@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button button1,button2;
     private FirebaseAuth mAuth;
+    private ExerciseFilterManager exerciseFilterManager;
+    private TextView tvAgeGroup, tvRecommendations;
+    private LinearLayout layoutBeforeAge18, layoutAfterAge18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        exerciseFilterManager = new ExerciseFilterManager(this);
 
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
@@ -42,13 +48,20 @@ public class MainActivity extends AppCompatActivity {
 
         button1 = findViewById(R.id.startfitness1);
         button2 = findViewById(R.id.startfitness2);
+        
+        // Initialize layout references for age-based hiding
+        layoutBeforeAge18 = findViewById(R.id.layoutBeforeAge18);
+        layoutAfterAge18 = findViewById(R.id.layoutAfterAge18);
+        
+        // Load user data and setup age-appropriate recommendations
+        loadUserRecommendations();
 
         button1.setOnClickListener((v) -> {
             Intent intent = new Intent(MainActivity.this,SecondActivity.class);
             startActivity(intent);
         });
 
-        button1.setOnClickListener((v) -> {
+        button2.setOnClickListener((v) -> {
             Intent intent = new Intent(MainActivity.this,SecondActivity2.class);
             startActivity(intent);
         });
@@ -139,6 +152,52 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+
+    private void loadUserRecommendations() {
+        exerciseFilterManager.getUserData(new ExerciseFilterManager.UserDataCallback() {
+            @Override
+            public void onUserDataLoaded(int age, String fitnessLevel) {
+                // Update UI with personalized recommendations
+                String ageLabel = exerciseFilterManager.getAgeGroupLabel(age);
+                String intensity = exerciseFilterManager.getRecommendedIntensity(age, fitnessLevel);
+                
+                runOnUiThread(() -> {
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setSubtitle(ageLabel);
+                    }
+                    
+                    // Hide/show age-appropriate sections
+                    updateUIBasedOnAge(age);
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+                // Handle guest users or errors gracefully - show all sections for guests
+                runOnUiThread(() -> {
+                    updateUIBasedOnAge(16); // Default to youth view for guests
+                });
+            }
+        });
+    }
+    
+    private void updateUIBasedOnAge(int age) {
+        if (layoutBeforeAge18 != null && layoutAfterAge18 != null) {
+            if (age <= 18) {
+                // Show youth section, hide adult section
+                layoutBeforeAge18.setVisibility(View.VISIBLE);
+                layoutAfterAge18.setVisibility(View.GONE);
+                Toast.makeText(this, "Showing youth-appropriate exercises", Toast.LENGTH_SHORT).show();
+            } else {
+                // Show adult section, hide youth section  
+                layoutBeforeAge18.setVisibility(View.GONE);
+                layoutAfterAge18.setVisibility(View.VISIBLE);
+                Toast.makeText(this, "Showing adult exercises for age " + age, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     public void beforeage18(View view) {
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);
         startActivity(intent);
@@ -147,6 +206,38 @@ public class MainActivity extends AppCompatActivity {
     public void afterage18(View view) {
         Intent intent = new Intent(MainActivity.this, SecondActivity2.class);
         startActivity(intent);
+    }
+    
+    public void smartWorkout(View view) {
+        // Smart workout routing based on user's age
+        exerciseFilterManager.getUserData(new ExerciseFilterManager.UserDataCallback() {
+            @Override
+            public void onUserDataLoaded(int age, String fitnessLevel) {
+                Intent intent;
+                if (age <= 18) {
+                    intent = new Intent(MainActivity.this, SecondActivity.class);
+                    Toast.makeText(MainActivity.this, 
+                        "Loading youth-appropriate exercises for age " + age, 
+                        Toast.LENGTH_SHORT).show();
+                } else {
+                    intent = new Intent(MainActivity.this, SecondActivity2.class);
+                    Toast.makeText(MainActivity.this, 
+                        "Loading adult exercises for age " + age, 
+                        Toast.LENGTH_SHORT).show();
+                }
+                startActivity(intent);
+            }
+
+            @Override
+            public void onError(String error) {
+                // Default to youth exercises for guest users
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                Toast.makeText(MainActivity.this, 
+                    "Loading exercises in guest mode", 
+                    Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
     }
 
     public void Food(View view) {

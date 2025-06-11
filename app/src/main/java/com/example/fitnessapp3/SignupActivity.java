@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +25,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private TextInputEditText etFullName, etEmail, etPassword, etConfirmPassword;
+    private TextInputEditText etFullName, etEmail, etPassword, etConfirmPassword, etAge;
     private Button btnSignup;
     private TextView tvLogin;
+    private Spinner spinnerFitnessLevel;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
     private Toolbar toolbar;
@@ -45,8 +48,13 @@ public class SignupActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
+        etAge = findViewById(R.id.etAge);
+        spinnerFitnessLevel = findViewById(R.id.spinnerFitnessLevel);
         btnSignup = findViewById(R.id.btnSignup);
         tvLogin = findViewById(R.id.tvLogin);
+
+        // Setup fitness level spinner
+        setupFitnessLevelSpinner();
 
         // Setup toolbar
         setSupportActionBar(toolbar);
@@ -71,11 +79,28 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
+    private void setupFitnessLevelSpinner() {
+        String[] fitnessLevels = {
+            "Select Fitness Level",
+            "Beginner (Just Starting)",
+            "Intermediate (Some Experience)",
+            "Advanced (Very Active)",
+            "Expert (Athletic/Professional)"
+        };
+        
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, 
+            android.R.layout.simple_spinner_item, fitnessLevels);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFitnessLevel.setAdapter(adapter);
+    }
+
     private void registerUser() {
         String fullName = etFullName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
         String confirmPassword = etConfirmPassword.getText().toString().trim();
+        String ageStr = etAge.getText().toString().trim();
+        String fitnessLevel = spinnerFitnessLevel.getSelectedItem().toString();
 
         // Validation
         if (TextUtils.isEmpty(fullName)) {
@@ -126,6 +151,31 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
+        if (TextUtils.isEmpty(ageStr)) {
+            etAge.setError("Age is required");
+            etAge.requestFocus();
+            return;
+        }
+
+        int age;
+        try {
+            age = Integer.parseInt(ageStr);
+            if (age < 12 || age > 100) {
+                etAge.setError("Age must be between 12 and 100");
+                etAge.requestFocus();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            etAge.setError("Please enter a valid age");
+            etAge.requestFocus();
+            return;
+        }
+
+        if (fitnessLevel.equals("Select Fitness Level")) {
+            Toast.makeText(this, "Please select your fitness level", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Disable button during registration
         btnSignup.setEnabled(false);
         btnSignup.setText("Creating Account...");
@@ -154,7 +204,7 @@ public class SignupActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     // Save user data to Firestore
-                                                    saveUserToFirestore(user.getUid(), fullName, email);
+                                                    saveUserToFirestore(user.getUid(), fullName, email, age, fitnessLevel);
                                                 } else {
                                                     Toast.makeText(SignupActivity.this, 
                                                             "Failed to update profile", 
@@ -178,8 +228,10 @@ public class SignupActivity extends AppCompatActivity {
                 });
     }
 
-    private void saveUserToFirestore(String uid, String name, String email) {
+    private void saveUserToFirestore(String uid, String name, String email, int age, String fitnessLevel) {
         User user = new User(uid, name, email);
+        user.setAge(age);
+        user.setFitnessLevel(fitnessLevel);
         
         firestore.collection("users").document(uid)
                 .set(user)
