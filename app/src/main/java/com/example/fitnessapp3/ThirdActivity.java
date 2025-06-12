@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,11 +22,13 @@ public class ThirdActivity extends AppCompatActivity {
 
 
     String buttonvalue;
+    String exerciseCategory;
     Button startBtn;
     private CountDownTimer countDownTimer;
     TextView mtextview;
     private boolean MTimeRunning;
     private long MTimeleftinmills;
+    private ProgressTracker progressTracker;
 
 
   @SuppressLint("MissingInflatedId")
@@ -37,15 +40,21 @@ public class ThirdActivity extends AppCompatActivity {
       getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
           @Override
           public void handleOnBackPressed() {
-              Intent intent = new Intent(ThirdActivity.this,SecondActivity.class);
-              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-              startActivity(intent);
-              finish();
+              goBackToExerciseList();
           }
       });
 
         Intent intent = getIntent();
         buttonvalue = intent.getStringExtra("value");
+        exerciseCategory = intent.getStringExtra("exerciseCategory");
+        
+        // Initialize progress tracker
+        progressTracker = new ProgressTracker(this);
+        
+        // Default to youth exercises if not specified
+        if (exerciseCategory == null) {
+            exerciseCategory = ProgressTracker.YOUTH_EXERCISES;
+        }
 
 
         int intvalue = Integer.valueOf(buttonvalue);
@@ -156,25 +165,51 @@ public class ThirdActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                // Mark current exercise as completed
+                int currentExercise = Integer.valueOf(buttonvalue);
+                progressTracker.completeExercise(exerciseCategory, currentExercise, new ProgressTracker.UpdateCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d("ThirdActivity", "Progress updated successfully for exercise " + currentExercise);
+                        Toast.makeText(ThirdActivity.this, "Exercise completed! 🎉", Toast.LENGTH_SHORT).show();
+                        
+                        // Check if there are more exercises to unlock
+                        int totalExercises = exerciseCategory.equals(ProgressTracker.YOUTH_EXERCISES) ? 15 : 15;
+                        int nextExercise = currentExercise + 1;
+                        
+                        if (nextExercise <= totalExercises) {
+                            // Go to next exercise if available
+                            Intent intent = new Intent(ThirdActivity.this, ThirdActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.putExtra("value", String.valueOf(nextExercise));
+                            intent.putExtra("exerciseCategory", exerciseCategory);
+                            startActivity(intent);
+                        } else {
+                            // All exercises completed - return to exercise list
+                            Toast.makeText(ThirdActivity.this, "Congratulations! All exercises completed! 🏆", Toast.LENGTH_LONG).show();
+                            goBackToExerciseList();
+                        }
+                    }
 
-
-                int newvalue = Integer.valueOf(buttonvalue) + 1 ;
-                if(newvalue <= 7 ){
-                    Intent intent = new Intent(ThirdActivity.this,ThirdActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra("value",String.valueOf(newvalue));
-                    startActivity(intent);
-
-                }
-
-                else {
-                    newvalue = 1;
-                    Intent intent = new Intent(ThirdActivity.this,ThirdActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra("value",String.valueOf(newvalue));
-                    startActivity(intent);
-
-                }
+                    @Override
+                    public void onError(String error) {
+                        Log.e("ThirdActivity", "Error saving progress for exercise " + currentExercise + ": " + error);
+                        Toast.makeText(ThirdActivity.this, "Error saving progress: " + error, Toast.LENGTH_SHORT).show();
+                        // Still proceed to next exercise even if saving failed
+                        int nextExercise = currentExercise + 1;
+                        int totalExercises = exerciseCategory.equals(ProgressTracker.YOUTH_EXERCISES) ? 15 : 15;
+                        
+                        if (nextExercise <= totalExercises) {
+                            Intent intent = new Intent(ThirdActivity.this, ThirdActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.putExtra("value", String.valueOf(nextExercise));
+                            intent.putExtra("exerciseCategory", exerciseCategory);
+                            startActivity(intent);
+                        } else {
+                            goBackToExerciseList();
+                        }
+                    }
+                });
             }
         }.start();
         startBtn.setText("Pause");
@@ -200,6 +235,18 @@ public class ThirdActivity extends AppCompatActivity {
         mtextview.setText(timeLeftText);
 
 
+    }
+    
+    private void goBackToExerciseList() {
+        Intent intent;
+        if (exerciseCategory.equals(ProgressTracker.YOUTH_EXERCISES)) {
+            intent = new Intent(ThirdActivity.this, SecondActivity.class);
+        } else {
+            intent = new Intent(ThirdActivity.this, SecondActivity2.class);
+        }
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
 
 

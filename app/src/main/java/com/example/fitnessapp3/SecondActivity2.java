@@ -2,12 +2,16 @@ package com.example.fitnessapp3;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,11 +25,17 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.util.List;
+
 public class SecondActivity2 extends AppCompatActivity {
 
     int[] newArray;
     private AdView mAdView,mAdView1;
     private ExerciseFilterManager exerciseFilterManager;
+    private ProgressTracker progressTracker;
+    private ProgressBar progressBar;
+    private TextView progressText;
+    private List<Integer> unlockedExercises;
 
 
     @SuppressLint("MissingInflatedId")
@@ -46,8 +56,13 @@ public class SecondActivity2 extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         
-        // Initialize exercise filter manager
+        // Initialize managers
         exerciseFilterManager = new ExerciseFilterManager(this);
+        progressTracker = new ProgressTracker(this);
+        
+        // Initialize UI elements
+        progressBar = findViewById(R.id.progressBar);
+        progressText = findViewById(R.id.progressText);
         
         // Set title for adult exercises
         if (getSupportActionBar() != null) {
@@ -56,6 +71,9 @@ public class SecondActivity2 extends AppCompatActivity {
         
         // Load user data and show appropriate message
         loadUserAgeInfo();
+        
+        // Load progress and update UI
+        loadProgress();
 
         // Adult exercise array (same IDs but will be filtered based on age)
         newArray = new int[]{
@@ -171,37 +189,96 @@ public class SecondActivity2 extends AppCompatActivity {
         });
     }
 
-    public void Imagebuttonclicked(View view) {
-        // Check if user age is appropriate for these exercises
-        exerciseFilterManager.getUserData(new ExerciseFilterManager.UserDataCallback() {
+    private void loadProgress() {
+        progressTracker.getProgress(ProgressTracker.ADULT_EXERCISES, new ProgressTracker.ProgressCallback() {
             @Override
-            public void onUserDataLoaded(int age, String fitnessLevel) {
-                if (age <= 18) {
-                    Toast.makeText(SecondActivity2.this, 
-                        "This exercise is designed for adults. Consider youth-appropriate alternatives.", 
-                        Toast.LENGTH_SHORT).show();
-                }
-                proceedWithExercise(view);
+            public void onProgressLoaded(int completedExercises, int totalExercises, List<Integer> unlockedExercisesList) {
+                unlockedExercises = unlockedExercisesList;
+                
+                // Update progress bar
+                int progressPercentage = totalExercises > 0 ? (completedExercises * 100) / totalExercises : 0;
+                progressBar.setProgress(progressPercentage);
+                progressText.setText(completedExercises + " / " + totalExercises + " exercises completed");
+                
+                // Update exercise UI to show locked/unlocked states
+                updateExerciseUI();
             }
-
+            
             @Override
             public void onError(String error) {
-                // Allow guests to proceed
-                proceedWithExercise(view);
+                Log.e("SecondActivity2", "Error loading progress: " + error);
+                Toast.makeText(SecondActivity2.this, "Error loading progress", Toast.LENGTH_SHORT).show();
             }
         });
     }
     
-    private void proceedWithExercise(View view) {
+    private void updateExerciseUI() {
+        if (unlockedExercises == null) return;
+        
+        for (int i = 0; i < newArray.length; i++) {
+            int exerciseId = i + 1;
+            LinearLayout exerciseLayout = findViewById(newArray[i]);
+            
+            if (exerciseLayout != null) {
+                if (unlockedExercises.contains(exerciseId)) {
+                    // Exercise is unlocked
+                    exerciseLayout.setAlpha(1.0f);
+                    exerciseLayout.setEnabled(true);
+                } else {
+                    // Exercise is locked
+                    exerciseLayout.setAlpha(0.5f);
+                    exerciseLayout.setEnabled(false);
+                }
+            }
+        }
+    }
+
+    public void Imagebuttonclicked(View view) {
         for (int i = 0; i < newArray.length; i++) {
             if (view.getId() == newArray[i]) {
-                int value = i + 1;
-                Log.i("ADULT_EXERCISE", String.valueOf(value));
-                Intent intent = new Intent(SecondActivity2.this, ThirdActivity2.class);
-                intent.putExtra("value", String.valueOf(value));
-                startActivity(intent);
+                int exerciseId = i + 1;
+                
+                // Check if exercise is unlocked
+                if (unlockedExercises != null && !unlockedExercises.contains(exerciseId)) {
+                    Toast.makeText(this, "Complete previous exercises to unlock this one!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                
+                // Check if user age is appropriate for these exercises
+                exerciseFilterManager.getUserData(new ExerciseFilterManager.UserDataCallback() {
+                    @Override
+                    public void onUserDataLoaded(int age, String fitnessLevel) {
+                        if (age <= 18) {
+                            Toast.makeText(SecondActivity2.this, 
+                                "This exercise is designed for adults. Consider youth-appropriate alternatives.", 
+                                Toast.LENGTH_SHORT).show();
+                        }
+                        proceedWithExercise(exerciseId);
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        // Allow guests to proceed
+                        proceedWithExercise(exerciseId);
+                    }
+                });
                 break;
             }
         }
+    }
+    
+    private void proceedWithExercise(int exerciseId) {
+        Log.i("ADULT_EXERCISE", String.valueOf(exerciseId));
+        Intent intent = new Intent(SecondActivity2.this, ThirdActivity2.class);
+        intent.putExtra("value", String.valueOf(exerciseId));
+        intent.putExtra("exerciseCategory", ProgressTracker.ADULT_EXERCISES);
+        startActivity(intent);
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh progress when returning to this activity
+        loadProgress();
     }
 }
