@@ -208,37 +208,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     
-    public void smartWorkout(View view) {
-        // Smart workout routing based on user's age
-        exerciseFilterManager.getUserData(new ExerciseFilterManager.UserDataCallback() {
-            @Override
-            public void onUserDataLoaded(int age, String fitnessLevel) {
-                Intent intent;
-                if (age <= 18) {
-                    intent = new Intent(MainActivity.this, SecondActivity.class);
-                    Toast.makeText(MainActivity.this, 
-                        "Loading youth-appropriate exercises for age " + age, 
-                        Toast.LENGTH_SHORT).show();
-                } else {
-                    intent = new Intent(MainActivity.this, SecondActivity2.class);
-                    Toast.makeText(MainActivity.this, 
-                        "Loading adult exercises for age " + age, 
-                        Toast.LENGTH_SHORT).show();
-                }
-                startActivity(intent);
-            }
 
-            @Override
-            public void onError(String error) {
-                // Default to youth exercises for guest users
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                Toast.makeText(MainActivity.this, 
-                    "Loading exercises in guest mode", 
-                    Toast.LENGTH_SHORT).show();
-                startActivity(intent);
-            }
-        });
-    }
 
     public void Food(View view) {
         Intent intent = new Intent(MainActivity.this, FoodActivity.class);
